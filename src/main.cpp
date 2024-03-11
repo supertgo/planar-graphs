@@ -89,7 +89,7 @@ std::vector<std::vector<int>> find_faces(std::vector<Point> vertices,
 int main(int argc, char *argv[]) {
   unsigned int ve, edges, faces;
   float x, y;
-  int neighbohrs;
+  int neighbors;
 
   std::cin >> ve >> edges;
 
@@ -101,31 +101,22 @@ int main(int argc, char *argv[]) {
   adj.resize(ve);
 
   for (unsigned int i = 0; i < ve; i++) {
-    std::cin >> x >> y >> neighbohrs;
+    std::cin >> x >> y >> neighbors;
 
     vertices.push_back({x, y});
-    adj[i].resize(neighbohrs);
+    adj[i].resize(neighbors);
 
     int n;
 
-    for (int j = 0; j < neighbohrs; j++) {
+    for (int j = 0; j < neighbors; j++) {
       std::cin >> n;
-      // -1 cause the starting vertices is 1 by the input
+      // -1 cause the starting vertex is 1 by the input
       adj[i][j] = n - 1;
     }
   }
 
    std::cout << "answer: "<< std::endl;
    std::cout << faces << std::endl;
-
-  // for (int i = 0; i < adj.size(); i++) {
-  //   std::cout << "vertice " << i << " ";
-  //   std::cout << "neighbohrs: ";
-  //   for (int j = 0; j < adj[i].size(); j++) {
-  //     std::cout << " " << adj[i][j];
-  //   }
-  //   std::cout << std::endl;
-  // }
 
   auto f = find_faces(vertices, adj);
 
@@ -138,7 +129,6 @@ int main(int argc, char *argv[]) {
     std::cout << std::endl;
   }
 
-  // std::cout << faces << " faces" << std::endl;
 
   return 0;
 }
