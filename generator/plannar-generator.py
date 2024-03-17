@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 
 
-def generate_planar_graph(vertices, edges):
+def generate_planar_graph(vertices):
     graph = {}
     for i in range(vertices):
         x, y, num_neighbors, *neighbors = map(float, input().split())
@@ -16,9 +16,9 @@ def draw_planar_graph(graph):
         x = data["x"]
         y = data["y"]
         plt.plot(x, y, "bo")
-        plt.text(x, y, str(vertex), fontsize=12, ha="center")
+        plt.text(x, y, str(vertex + 1), fontsize=12, ha="center")
         for neighbor in data["neighbors"]:
-            if neighbor in graph:  # Check if the neighbor vertex exists
+            if neighbor in graph:
                 nx = graph[neighbor]["x"]
                 ny = graph[neighbor]["y"]
                 plt.plot([x, nx], [y, ny], "k-")
@@ -29,7 +29,7 @@ def draw_planar_graph(graph):
 
 def main():
     vertices, edges = map(int, input().split())
-    graph = generate_planar_graph(vertices, edges)
+    graph = generate_planar_graph(vertices)
     draw_planar_graph(graph)
 
 

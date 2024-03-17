@@ -6,3 +6,7 @@ where:
 - v -> vertices
 - e -> edges
 - f -> faces
+
+replace points for vertex
+
+cross for cross_product

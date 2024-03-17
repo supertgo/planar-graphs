@@ -4,8 +4,8 @@ SRC = src
 OBJ = obj
 INC = include
 BIN = bin
-HDRS = 
-OBJS = $(OBJ)/main.o
+HDRS = $(INC)/point.h $(INC)/graph.h
+OBJS = $(OBJ)/main.o $(OBJ)/point.o $(OBJ)/graph.o
 CFLAGS = -Wall -g -c -I$(INC) -std=c++11
 EXE = $(BIN)/tp1.out
 
