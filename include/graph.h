@@ -7,10 +7,11 @@ private:
   unsigned int edges_cardinality;
   std::vector<Point> vertices;
   std::vector<std::vector<int>> adj;
+  std::vector<std::vector<int>> faces;
   void init_graph();
 
 public:
   Graph();
-  std::vector<std::vector<int>> find_faces();
-  void print_graph(std::vector<std::vector<int>> faces);
+  void find_faces();
+  void print_graph();
 };

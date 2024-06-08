@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 
-int main(int argc, char *argv[]) {
-  Graph *g = new Graph();
+int main() {
+  Graph g = Graph();
 
-  auto f = g->find_faces();
+  g.find_faces();
 
-  g->print_graph(f);
+  g.print_graph();
 
   return 0;
 }

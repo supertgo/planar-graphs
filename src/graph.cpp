@@ -34,13 +34,14 @@ void Graph::init_graph() {
   }
 }
 
-std::vector<std::vector<int>> Graph::find_faces() {
+void Graph::find_faces() {
   int n = this->vertices.size();
   std::vector<std::vector<char>> used(n);
 
   for (int i = 0; i < n; i++) {
     used[i].resize(this->adj[i].size());
     used[i].assign(this->adj[i].size(), 0);
+
     auto compare = [&](int l, int r) {
       Point pl = this->vertices[l] - this->vertices[i];
       Point pr = this->vertices[r] - this->vertices[i];
@@ -48,18 +49,21 @@ std::vector<std::vector<int>> Graph::find_faces() {
         return pl.half() < pr.half();
       return pl.cross(pr) > 0;
     };
+
     std::sort(this->adj[i].begin(), this->adj[i].end(), compare);
   }
 
-  std::vector<std::vector<int>> faces;
   for (int i = 0; i < n; i++) {
     for (unsigned int edge_id = 0; edge_id < this->adj[i].size(); edge_id++) {
+
       if (used[i][edge_id]) {
         continue;
       }
+
       std::vector<int> face;
       int v = i;
       int e = edge_id;
+
       while (!used[v][e]) {
         used[v][e] = true;
         face.push_back(v);
@@ -82,7 +86,9 @@ std::vector<std::vector<int>> Graph::find_faces() {
       }
 
       std::reverse(face.begin(), face.end());
+
       int sign = 0;
+
       for (unsigned int j = 0; j < face.size(); j++) {
         int j1 = (j + 1) % face.size();
         int j2 = (j + 2) % face.size();
@@ -97,21 +103,23 @@ std::vector<std::vector<int>> Graph::find_faces() {
         }
       }
       if (sign <= 0) {
-        faces.insert(faces.begin(), face);
+        this->faces.insert(this->faces.begin(), face);
       } else {
-        faces.emplace_back(face);
+        this->faces.emplace_back(face);
       }
     }
   }
-  return faces;
 }
 
-void Graph::print_graph(std::vector<std::vector<int>> faces) {
-  for (size_t i = 0; i < faces.size(); i++) {
-    std::cout << faces[i].size() + 1 << " ";
-    std::cout << faces[i][faces[i].size() - 1] + 1;
-    for (unsigned int j = 0; j < faces[i].size(); j++) {
-      std::cout << " " << faces[i][j] + 1;
+void Graph::print_graph() {
+  std::cout << this->faces.size() << std::endl;
+
+  for (size_t i = 0; i < this->faces.size(); i++) {
+    std::cout << this->faces[i].size() + 1 << " ";
+    std::cout << this->faces[i][this->faces[i].size() - 1] + 1;
+
+    for (unsigned int j = 0; j < this->faces[i].size(); j++) {
+      std::cout << " " << this->faces[i][j] + 1;
     }
     std::cout << std::endl;
   }
